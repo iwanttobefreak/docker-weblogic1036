@@ -1,4 +1,4 @@
-FROM oraclelinux:6.6
+FROM oraclelinux:6.8
 MAINTAINER Jose Legido "jose@legido.com"
 
 # USUARIS
