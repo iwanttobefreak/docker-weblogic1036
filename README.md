@@ -1,0 +1,1 @@
+# docker-weblogic1036
