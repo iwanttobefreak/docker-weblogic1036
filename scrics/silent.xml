@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Silent installer option: -mode=silent -silent_xml=/home/me/silent.xml -->
+
+<domain-template-descriptor>
+
+<input-fields>
+   <data-value name="BEAHOME"                   value="/u01/middleware1036/" />
+   <data-value name="USER_INSTALL_DIR"          value="/u01/middleware1036" />
+   <data-value name="INSTALL_NODE_MANAGER_SERVICE"   value="no" />
+   <data-value name="COMPONENT_PATHS" value="WebLogic Server" />
+</input-fields>
+</domain-template-descriptor>
