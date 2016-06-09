@@ -51,8 +51,8 @@ v_software=/u01/software/wls1036_generic.jar
 v_tmp_silent=/tmp/$$_silent.xml
 
 
-mkdir $v_descarga_software
-cd /u01/software
+mkdir -p $v_descarga_software
+cd $v_descarga_software
 
 # Descarga de JVM
 curl -A "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.6.0" \
@@ -64,10 +64,10 @@ read -p "Oracle User:" v_usuario_oracle
 read -s -p "Password:" v_contrasenya_oracle
 
 
-v_Site2pstoreToken=`curl -s -A "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.6.0" "http://www.oracle.com/webapps/redirect/signon?nexturl=https://www.oracle.com/technetwork/indexes/downloads/index.html" | grep Site2pstoreToken | awk -F\= {'print  $3'} | awk -F\" {'print $1'}`
+v_Site2pstoreToken=`curl -s -A "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0" -L $v_download | grep site2pstoretoken | awk -Fsite2pstoretoken {'print $2'}|awk -F\= {'print  $2'}|awk -F\" {'print $2'}`
 
 curl -s -A "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.6.0"  \
--d 'ssousername='$usuario'&v_usuario_oracle='$v_contrasenya_oracle'&site2pstoretoken='$v_Site2pstoreToken \
+-d 'ssousername='$v_usuario_oracle'&password='$v_contrasenya_oracle'&site2pstoretoken='$v_Site2pstoreToken \
 -o /dev/null \
 https://login.oracle.com/sso/auth -c $v_cookie
 
