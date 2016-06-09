@@ -35,7 +35,7 @@ done
 
 #Variables
 # Carpeta descarga software
-if [ v_local -ne 1 ]
+if [ $v_local -ne 1 ]
 then
   v_descarga_software=/u01/software
 fi
