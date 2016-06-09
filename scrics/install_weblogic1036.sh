@@ -109,6 +109,6 @@ readTemplate('$v_template')
 set('Name','$v_nombre_dominio')
 writeTemplate('$v_nou_template')
 closeTemplate()
-createDomain('$v_nou_template','$v_ruta_dominio/$v_nombre_dominio','$v_weblogic_user','$v_weblogic_password)
+createDomain('$v_nou_template','$v_ruta_dominio/$v_nombre_dominio','$v_weblogic_user','$v_weblogic_password')
 exit()
 EOF
