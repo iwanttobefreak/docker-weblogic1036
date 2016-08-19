@@ -1,5 +1,10 @@
 #!/bin/bash
-v_usuario_oracle=$ORACLE_USER
+if [ -z "$ORACLE_USER" ]
+then
+  exit 0
+fi
+
+v_usuario_oracle="$ORACLE_USER"
 v_contrasenya_oracle=$ORACLE_PASSWORD
 
 v_weblogic_user=weblogic
