@@ -21,6 +21,6 @@ USER weblogic
 RUN /u01/install_weblogic1036.sh $ORACLE_USER $ORACLE_PASSWORD
 
 #Esborrem programari d'instalacio
-RUN rm /u01/install_weblogic1036.sh && rm /u01/template1036.jar && rm /u01/wls1036_generic.jar && rm /u01/jdk-7u79-linux-x64.tar.gz
+RUN rm /u01/install_weblogic1036.sh || rm /u01/template1036.jar || rm /u01/wls1036_generic.jar || rm /u01/jdk-7u79-linux-x64.tar.gz
 
 CMD ["/u01/domains/mydomain/startWebLogic.sh"]
