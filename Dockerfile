@@ -6,21 +6,35 @@ ARG ORACLE_PASSWORD
 
 # USUARIS
 RUN groupadd -g 1001 weblogic && useradd -u 1001 -g weblogic weblogic
-RUN  mkdir /u01 && chown weblogic. /u01
+RUN mkdir -p /u01/install && mkdir -p /u01/scripts
 
 # EINES
 RUN yum install -y tar
 
-COPY scrics/install_weblogic1036.sh /u01/install_weblogic1036.sh
-COPY scrics/template1036.jar /u01/template1036.jar
-RUN chown -R weblogic. /u01/*
-RUN chmod +x /u01/install_weblogic1036.sh
+COPY scrics/install_weblogic1036.sh /u01/install/install_weblogic1036.sh
+COPY scrics/template1036.jar /u01/install/template1036.jar
+COPY scrics/create_domain.ini /u01/install/create_domain.ini
+COPY scrics/start_AdminServer.sh /u01/scripts/start_AdminServer.sh
+COPY scrics/start_nodemanager.sh /u01/scripts/start_nodemanager.sh
+COPY scrics/start_ALL.sh /u01/scripts/start_ALL.sh
+ADD https://raw.githubusercontent.com/iwanttobefreak/weblogic/master/scrics/install/create_domain.sh /u01/install/create_domain.sh
+ADD https://raw.githubusercontent.com/iwanttobefreak/weblogic/master/scrics/install/create_domain.py /u01/install/create_domain.py 
+RUN chown -R weblogic. /u01
+RUN chmod +x /u01/install/install_weblogic1036.sh
+RUN chmod +x /u01/install/create_domain.sh
+RUN chmod +x /u01/scripts/start_nodemanager.sh
+RUN chmod +x /u01/scripts/start_AdminServer.sh
+RUN chmod +x /u01/scripts/start_ALL.sh
 
 USER weblogic
 
-RUN /u01/install_weblogic1036.sh $ORACLE_USER $ORACLE_PASSWORD
+ENV USER_MEM_ARGS="-Djava.security.egd=file:/dev/./urandom"
+
+RUN cd /u01/install && /u01/install/install_weblogic1036.sh $ORACLE_USER $ORACLE_PASSWORD
+
+RUN cd /u01/install && /u01/scripts/start_AdminServer.sh && ./create_domain.sh create_domain.ini
 
 #Esborrem programari d'instalacio
-RUN rm /u01/install_weblogic1036.sh || rm /u01/template1036.jar || rm /u01/wls1036_generic.jar || rm /u01/jdk-7u79-linux-x64.tar.gz
+RUN rm -f /u01/install/*
 
-CMD ["/u01/domains/mydomain/startWebLogic.sh"]
+CMD ["/u01/scripts/start_ALL.sh"]

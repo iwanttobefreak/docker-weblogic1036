@@ -11,16 +11,16 @@ v_weblogic_user=weblogic
 v_weblogic_password=weblogic01
 v_ruta_binarios=/u01/middleware1036
 v_java=/u01/java/bin/java
-v_template=/u01/template1036.jar
+v_template=/u01/install/template1036.jar
 v_ruta_dominio=/u01/domains
 v_nou_template=/tmp/$$_nou_template.jar
 v_nombre_dominio=mydomain
 v_cookie=/tmp/$$_cookie
 v_download=http://download.oracle.com/otn/nt/middleware/11g/wls/1036/wls1036_generic.jar
-v_software=/u01/wls1036_generic.jar
+v_software=/u01/install/wls1036_generic.jar
 v_tmp_silent=/tmp/$$_silent.xml
 
-cd /u01
+cd /u01/install
 
 # Descarga de JVM
 curl -A "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.6.0" \
@@ -41,8 +41,8 @@ curl -A "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Ic
 -OL $v_download
 
 #Instalacion JVM
-tar -xzvf /u01/jdk-7u79-linux-x64.tar.gz -C /u01
-mv /u01/jdk1.7.0_79 /u01/java
+tar -xzvf /u01/install/jdk-7u79-linux-x64.tar.gz -C /u01/install
+mv /u01/install/jdk1.7.0_79 /u01/java
 
 #Instalación Weblogic
 echo '<?xml version="1.0" encoding="UTF-8"?>
