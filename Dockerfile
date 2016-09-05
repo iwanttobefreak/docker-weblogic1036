@@ -32,7 +32,7 @@ ENV USER_MEM_ARGS="-Djava.security.egd=file:/dev/./urandom"
 
 RUN cd /u01/install && /u01/install/install_weblogic1036.sh $ORACLE_USER $ORACLE_PASSWORD
 
-RUN cd /u01/install && /u01/scripts/start_AdminServer.sh && ./create_domain.sh create_domain.ini
+RUN cd /u01/install && /u01/scripts/start_AdminServer.sh && ./create_domain.sh create_domain.ini /u01/middleware1036/wlserver_10.3/server/bin/setWLSEnv.sh
 
 #Esborrem programari d'instalacio
 RUN rm -f /u01/install/*
